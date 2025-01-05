@@ -14,39 +14,29 @@ Format
 
         - User creation: https://www.postgresql.org/docs/8.0/sql-createuser.html
             - projects_owner (owner of db) 
-            <code>
-             CREATE USER projects_owner WITH PASSWORD '******' CREATEROLE CREATEDB;
-            </code>
+             <code>CREATE USER projects_owner WITH PASSWORD '******' CREATEROLE CREATEDB;</code>
             - anzscoclassifier_reader (only read access to schema anzsco)
-            <code>
-             CREATE USER anzscoclassifier_reader WITH PASSWORD 'reader_access';
-            </code>
+             <code>CREATE USER anzscoclassifier_reader WITH PASSWORD 'reader_access';</code>
             #### Expected output of users created
             ![Expected Output](user_creation.png)
 
         - Database creation: https://www.postgresql.org/docs/current/sql-createdatabase.html
             - projects (this db will possibily contain future projects as well)
-            <code>
-             CREATE DATABASE projects OWNER projects_owner;
-            </code>
+             <code>CREATE DATABASE projects OWNER projects_owner;</code>
             #### Expected output of db created
             ![Expected Output](db_creation.png)
 
         - Schema creation: https://www.postgresql.org/docs/current/sql-createschema.html
             - anzscoclassifier
-            <code>
-             CREATE SCHEMA IF NOT EXISTS anzscoclassifier AUTHORIZATION projects_owner;
-            </code>
+             <code>CREATE SCHEMA IF NOT EXISTS anzscoclassifier AUTHORIZATION projects_owner;</code>
             #### Expected output of schema created
-            ![alt text](image.png)
+            ![alt text](schema_creation.png)
 
         - Table creation: https://www.postgresql.org/docs/current/sql-createtable.html
             - anzscocodes
 
         - Grant access: https://www.postgresql.org/docs/current/sql-grant.html
             - grant select, connect on anzscocodes to user anzscocodes_reader
-            <code>
-            GRANT SELECT, CONNECT, USAGE ON anzscocodes TO anzscoclassifier_reader;
-            </code>
+             <code>GRANT SELECT, CONNECT, USAGE ON anzscocodes TO anzscoclassifier_reader;</code>
 
     - Setup psycopg2 to connect python code to PostgreSQL DB: https://www.datacamp.com/tutorial/tutorial-postgresql-python
